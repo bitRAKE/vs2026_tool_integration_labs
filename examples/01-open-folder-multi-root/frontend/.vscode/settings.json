@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "generated": true,
+    "**/*.tmp": true
+  }
+}
+

@@ -1,0 +1,9 @@
+[$RootKey$\TextMate\Repositories]
+"VsfDsl"="$PackageFolder$\Grammars"
+
+[$RootKey$\TextMate\LanguageConfiguration\GrammarMapping]
+"source.vsfdsl"="$PackageFolder$\vsf-language-configuration.json"
+
+[$RootKey$\TextMate\LanguageConfiguration\ContentTypeMapping]
+"vsfdsl"="$PackageFolder$\vsf-language-configuration.json"
+

@@ -1,0 +1,45 @@
+{
+  "configurations": [
+    {
+      "name": "LabMSVC-DebugLike",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "includePath": [
+        "${workspaceRoot}\\src\\**"
+      ],
+      "defines": [
+        "VSF_DEBUGLIKE=1"
+      ],
+      "intelliSenseMode": "windows-msvc-x64",
+      "environments": [
+        {
+          "VSF_OUT_DIR": "${workspaceRoot}\\out\\debuglike",
+          "VSF_PROFILE": "debuglike",
+          "environment": "LabMSVC-DebugLike"
+        }
+      ]
+    },
+    {
+      "name": "LabMSVC-TraceLike",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "includePath": [
+        "${workspaceRoot}\\src\\**"
+      ],
+      "defines": [
+        "VSF_TRACELIKE=1"
+      ],
+      "intelliSenseMode": "windows-msvc-x64",
+      "environments": [
+        {
+          "VSF_OUT_DIR": "${workspaceRoot}\\out\\tracelike",
+          "VSF_PROFILE": "tracelike",
+          "environment": "LabMSVC-TraceLike"
+        }
+      ]
+    }
+  ]
+}
+

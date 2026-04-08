@@ -1,0 +1,36 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "Compile VSF DSL",
+      "appliesTo": "*.vsfdsl",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\compile-vsfdsl.ps1",
+        "-InputPath",
+        "${file}",
+        "-OutputPath",
+        "${workspaceRoot}\\generated\\${fileBasename}.json"
+      ]
+    },
+    {
+      "taskName": "Clean Generated JSON",
+      "appliesTo": "*.vsfdsl",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\clean.ps1"
+      ]
+    }
+  ]
+}
+

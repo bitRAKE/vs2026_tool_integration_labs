@@ -1,0 +1,56 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "Build (DebugLike)",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "build",
+      "inheritEnvironments": [
+        "LabMSVC-DebugLike"
+      ],
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\build.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "TraceLike Build",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "inheritEnvironments": [
+        "LabMSVC-TraceLike"
+      ],
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\build.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Clean Outputs",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "clean",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\clean.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    }
+  ]
+}

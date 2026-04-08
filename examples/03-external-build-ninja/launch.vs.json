@@ -1,0 +1,17 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "name": "ninja-lab",
+      "project": "out\\ninja-lab.exe",
+      "program": "${workspaceRoot}\\out\\ninja-lab.exe",
+      "cwd": "${workspaceRoot}",
+      "args": [
+        "--from-launch"
+      ]
+    }
+  ]
+}
+

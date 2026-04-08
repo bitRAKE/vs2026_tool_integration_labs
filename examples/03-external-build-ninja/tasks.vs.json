@@ -1,0 +1,79 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "Build with Ninja",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "build",
+      "command": "ninja",
+      "args": [
+        "-f",
+        "build.ninja"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Clean with Ninja",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "clean",
+      "command": "ninja",
+      "args": [
+        "-f",
+        "build.ninja",
+        "-t",
+        "clean"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Rebuild with Ninja",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "rebuild",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "ninja -f build.ninja -t clean; ninja -f build.ninja"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Ninja Smoke Test",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "tests\\smoke.ps1",
+        "-Executable",
+        "out\\ninja-lab.exe"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskName": "List Ninja Outputs",
+      "appliesTo": "*",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "tests\\list-outputs.ps1",
+        "-OutputDir",
+        "out"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    }
+  ]
+}

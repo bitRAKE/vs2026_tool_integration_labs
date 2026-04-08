@@ -1,0 +1,11 @@
+# VSF DSL sample used for Open Folder and syntax-highlighting exploration.
+pipeline sample
+env local
+
+stage restore
+  task restore uses "dotnet restore"
+
+stage validate
+  task unit uses "dotnet test"
+  task smoke uses "pwsh ./tests/smoke.ps1"
+

@@ -1,0 +1,21 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "name": "Run service script - diagnostic",
+      "project": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "cwd": "${workspaceRoot}\\backend",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "app\\serve.ps1",
+        "-Mode",
+        "Diagnostic"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "..\\frontend",
+      "name": "Client"
+    },
+    {
+      "path": "..\\backend",
+      "name": "Service"
+    },
+    {
+      "path": "..\\shared",
+      "name": "Shared Notes"
+    }
+  ]
+}
+

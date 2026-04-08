@@ -1,0 +1,32 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "name": "VSF Env Probe (DebugLike)",
+      "project": "out\\debuglike\\vsf-environments.exe",
+      "cwd": "${workspaceRoot}",
+      "inheritEnvironments": [
+        "LabMSVC-DebugLike"
+      ],
+      "args": [
+        "--from-launch",
+        "debuglike"
+      ]
+    },
+    {
+      "type": "default",
+      "name": "VSF Env Probe (TraceLike)",
+      "project": "out\\tracelike\\vsf-environments.exe",
+      "cwd": "${workspaceRoot}",
+      "inheritEnvironments": [
+        "LabMSVC-TraceLike"
+      ],
+      "args": [
+        "--from-launch",
+        "tracelike"
+      ]
+    }
+  ]
+}

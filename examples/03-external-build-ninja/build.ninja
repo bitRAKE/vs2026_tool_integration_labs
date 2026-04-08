@@ -1,0 +1,13 @@
+rule ensure_dir
+  command = powershell.exe -NoLogo -ExecutionPolicy Bypass -File scripts\ensure-stamp.ps1 -Path $out
+  description = Ensure $out
+
+rule build_app
+  command = powershell.exe -NoLogo -ExecutionPolicy Bypass -File scripts\build-app.ps1 -Source $in -Output $out
+  description = Build $out
+
+build out\build.stamp: ensure_dir
+build out\ninja-lab.exe: build_app src\main.cpp | out\build.stamp
+
+default out\ninja-lab.exe
+

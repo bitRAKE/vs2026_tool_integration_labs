@@ -1,0 +1,21 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "name": "Preview generated pipeline",
+      "project": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "cwd": "${workspaceRoot}",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceRoot}\\scripts\\show-generated.ps1",
+        "-JsonPath",
+        "${workspaceRoot}\\generated\\pipeline.json"
+      ]
+    }
+  ]
+}

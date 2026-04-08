@@ -1,0 +1,23 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "Describe Service Script",
+      "appliesTo": "*.ps1",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "..\\shared\\tools\\show-workspace.ps1",
+        "-Role",
+        "service",
+        "-SelectedItem",
+        "${file}"
+      ]
+    }
+  ]
+}
+
