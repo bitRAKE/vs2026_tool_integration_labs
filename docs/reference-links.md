@@ -20,3 +20,12 @@ These are the Microsoft docs the repo is aligned to as of `2026-04-08`.
 - `Adding a Language Server Protocol extension`
   - https://learn.microsoft.com/en-us/visualstudio/extensibility/adding-an-lsp-extension?view=vs-2022
   - Key point: TextMate grammar repository registration and workspace settings packaging patterns.
+
+## Local Language References
+
+- `C:\git\~tgrysztar\fasm2\README.md`
+  - Key point: `fasm2.cmd` is the frontend entrypoint used by the real Open Folder sample.
+- `C:\git\~tgrysztar\fasm2\fasm2.cmd`
+  - Key point: it prepends `Include('fasm2.inc')` before invoking `fasmg`.
+- `C:\git\~tgrysztar\fasmg\core\docs\manual.txt`
+  - Key point: it documents `include` and `restartout`, which are the first real keywords highlighted by Example 07.

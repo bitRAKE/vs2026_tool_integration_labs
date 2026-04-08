@@ -10,7 +10,9 @@ $tests = @(
     "examples/02-open-folder-cpp-environments/tests/validate.ps1",
     "examples/03-external-build-ninja/tests/validate.ps1",
     "examples/04-external-build-dsl-pipeline/tests/validate.ps1",
-    "examples/05-dsl-textmate-vsix/tests/validate.ps1"
+    "examples/05-dsl-textmate-vsix/tests/validate.ps1",
+    "examples/06-open-folder-fasm2-build/tests/validate.ps1",
+    "examples/07-fasm-textmate-vsix/tests/validate.ps1"
 )
 
 $failures = @()

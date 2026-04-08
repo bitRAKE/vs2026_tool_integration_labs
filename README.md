@@ -8,6 +8,8 @@ This repo is a lab set for validating how `Visual Studio Community 2026 (18.x)` 
 
 Each example lives in its own folder, includes its own `README.md`, and has a `tests/validate.ps1` preflight script. The local scripts validate file shapes and runnable paths; the Visual Studio steps validate the IDE behavior we care about.
 
+The first five examples establish the foundation behavior. Examples 06 and 07 pivot that foundation into a real `fasm2`/`fasmg` workflow with checked-in sample sources and a real VSIX for `.fasm` and `.finc`.
+
 ## UI Notes
 
 - In Open Folder mode, the text in `tasks.vs.json` is not always the exact text shown in the Solution Explorer context menu.
@@ -40,6 +42,8 @@ Each example lives in its own folder, includes its own `README.md`, and has a `t
 | `examples/03-external-build-ninja` | `tasks.vs.json` driving `ninja` instead of a solution/project system | `File > Open > Folder` |
 | `examples/04-external-build-dsl-pipeline` | custom DSL compiler script plus Open Folder build/preview tasks | `File > Open > Folder` |
 | `examples/05-dsl-textmate-vsix` | VSIX packaging for TextMate grammar + Language Configuration | `Open Project` or `Open Folder` |
+| `examples/06-open-folder-fasm2-build` | real `fasm2.cmd` build and syntax-check tasks with environment overrides | `File > Open > Folder` |
+| `examples/07-fasm-textmate-vsix` | real `.fasm` and `.finc` VSIX highlighting package | `Open Project` or `Open Folder` |
 
 ## Assumptions
 
@@ -48,6 +52,9 @@ Each example lives in its own folder, includes its own `README.md`, and has a `t
   - `18.4.3`
 - Native C++ and Visual Studio extension workloads are assumed to exist for the C++ and VSIX labs.
 - The DSL examples intentionally use a fake `.vsfdsl` language so we can change the grammar and pipeline freely.
+- The real `fasm` examples assume the current local defaults unless overridden:
+  - `FASM2_PATH`
+  - `FASMG_PATH`
 
 ## Docs
 

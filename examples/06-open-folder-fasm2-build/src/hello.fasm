@@ -1,0 +1,10 @@
+; Buildable .fasm sample for Visual Studio Open Folder integration.
+org 100h
+
+mov ah,9
+mov dx,message_text
+int 21h
+
+int 20h
+
+include 'message.finc'

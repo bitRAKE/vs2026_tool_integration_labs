@@ -1,0 +1,82 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "Build with fasm2",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "build",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\build-sample.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Clean fasm2 Outputs",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "clean",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\clean.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Inspect FASM Output",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\show-output.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskName": "Syntax Check FASM Source",
+      "appliesTo": "*.fasm",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\test-syntax.ps1",
+        "-InputPath",
+        "${file}"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskName": "Syntax Check FASM Include",
+      "appliesTo": "*.finc",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\test-syntax.ps1",
+        "-InputPath",
+        "${file}"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    }
+  ]
+}

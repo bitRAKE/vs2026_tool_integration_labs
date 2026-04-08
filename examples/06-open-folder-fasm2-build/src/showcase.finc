@@ -1,0 +1,4 @@
+; Highlight showcase for the real .finc extension.
+single_text db 'Single quoted text',0
+double_text db "Double quoted text",0
+showcase_value = 2Ah

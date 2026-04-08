@@ -1,0 +1,3 @@
+; Shared include consumed by hello.fasm.
+message_text db 'Hello from VSF',13,10,'$'
+message_size = 10h

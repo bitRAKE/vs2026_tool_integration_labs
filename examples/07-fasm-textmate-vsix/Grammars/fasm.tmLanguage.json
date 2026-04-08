@@ -1,0 +1,67 @@
+{
+  "name": "FASM/FINC",
+  "scopeName": "source.fasm",
+  "fileTypes": [
+    "fasm",
+    "finc"
+  ],
+  "patterns": [
+    {
+      "include": "#double-strings"
+    },
+    {
+      "include": "#single-strings"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#numbers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.semicolon.fasm",
+          "match": ";.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.fasm",
+          "match": "(?i)\\b(include|restartout)\\b"
+        }
+      ]
+    },
+    "single-strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.fasm",
+          "match": "'(?:[^'\\\\]|\\\\.)*'"
+        }
+      ]
+    },
+    "double-strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.fasm",
+          "match": "\"(?:[^\"\\\\]|\\\\.)*\""
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.integer.fasm",
+          "match": "(?i)\\b(?:0x[0-9a-f][0-9a-f_]*|[01][01_]*b|[0-7][0-7_]*o|[0-9][0-9a-f_]*h|[0-9][0-9_]*)\\b"
+        }
+      ]
+    }
+  }
+}
