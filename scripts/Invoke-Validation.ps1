@@ -12,7 +12,10 @@ $tests = @(
     "examples/04-external-build-dsl-pipeline/tests/validate.ps1",
     "examples/05-dsl-textmate-vsix/tests/validate.ps1",
     "examples/06-open-folder-fasm2-build/tests/validate.ps1",
-    "examples/07-fasm-textmate-vsix/tests/validate.ps1"
+    "examples/07-fasm-textmate-vsix/tests/validate.ps1",
+    "examples/08-open-folder-fasm-profiles/tests/validate.ps1",
+    "examples/09-vsix-fasmg-selection-commands/tests/validate.ps1",
+    "examples/10-native-fasmg-parser-core/tests/validate.ps1"
 )
 
 $failures = @()

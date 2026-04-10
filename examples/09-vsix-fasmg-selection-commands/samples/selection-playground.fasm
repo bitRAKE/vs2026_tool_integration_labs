@@ -1,0 +1,26 @@
+format pe64 console
+entry start
+
+macro log_pair lhs, rhs
+local ..done
+    mov eax, ebx
+    mov r10d, eax
+    mov xmm1, xmm2
+    ; eax and 2Ah should stay unchanged in this comment
+    db "eax and 2Ah stay unchanged in this string", 0
+..done:
+end macro
+
+start:
+    mov eax, ebx
+    mov ecx, eax
+    mov r10d, eax
+    mov xmm1, xmm2
+    ; eax and 2Ah should stay unchanged in this comment
+    db 'eax and 2Ah stay unchanged in this string', 0
+    db "eax and 2Ah stay unchanged in this string", 0
+
+numbers:
+    dw 2Ah
+    dw 100h
+    dw 0DEADh

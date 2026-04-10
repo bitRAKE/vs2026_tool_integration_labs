@@ -8,7 +8,7 @@ This repo is a lab set for validating how `Visual Studio Community 2026 (18.x)` 
 
 Each example lives in its own folder, includes its own `README.md`, and has a `tests/validate.ps1` preflight script. The local scripts validate file shapes and runnable paths; the Visual Studio steps validate the IDE behavior we care about.
 
-The first five examples establish the foundation behavior. Examples 06 and 07 pivot that foundation into a real `fasm2`/`fasmg` workflow with checked-in sample sources and a real VSIX for `.fasm` and `.finc`.
+The first five examples establish the foundation behavior. Examples 06 and 07 pivot that foundation into a real `fasm2`/`fasmg` workflow with checked-in sample sources and a real VSIX for `.fasm` and `.finc`. Example 08 starts the next tier by moving real tool configuration into a schema-backed profile file. Example 09 adds the first command-style editor utilities on top of that language foundation. Example 10 starts the native parser-core and LSP track with a buildable bootstrap parser, Tree-sitter-aligned parse-tree semantics, a synced `tree-sitter-fasmg` workspace scaffold, managed smoke-test harness, regression checks against the local `fasmg_syntax` resources, and first-pass symbol lifecycle tracking for `restore` / `purge`.
 
 ## UI Notes
 
@@ -44,6 +44,9 @@ The first five examples establish the foundation behavior. Examples 06 and 07 pi
 | `examples/05-dsl-textmate-vsix` | VSIX packaging for TextMate grammar + Language Configuration | `Open Project` or `Open Folder` |
 | `examples/06-open-folder-fasm2-build` | real `fasm2.cmd` build and syntax-check tasks with environment overrides | `File > Open > Folder` |
 | `examples/07-fasm-textmate-vsix` | real `.fasm` and `.finc` VSIX highlighting package | `Open Project` or `Open Folder` |
+| `examples/08-open-folder-fasm-profiles` | schema-backed JSON profiles for real `fasm2`/`fasmg` build, syntax, and inspect tasks | `File > Open > Folder` |
+| `examples/09-vsix-fasmg-selection-commands` | selection-scoped VSIX commands for register rename, register casing, and hex literal conversion | `Open Project` or `Open Folder` |
+| `examples/10-native-fasmg-parser-core` | native bootstrap parser core plus parse-tree/analysis JSON, synced Tree-sitter scaffold assets, symbol lifecycle tracking, and LSP-oriented contract fixtures | terminal-driven foundation |
 
 ## Assumptions
 
@@ -59,5 +62,9 @@ The first five examples establish the foundation behavior. Examples 06 and 07 pi
 ## Docs
 
 Official references used to shape this repo are listed in [docs/reference-links.md](docs/reference-links.md).
+
+The next-step research track for deeper external-tool integration is documented in [docs/external-tool-integration-decision-memo.md](docs/external-tool-integration-decision-memo.md).
+
+The parser-core and LSP sequence for `fasmg` is tracked in [docs/fasmg_tree_sitter_lsp_roadmap.md](docs/fasmg_tree_sitter_lsp_roadmap.md).
 
 Use [docs/report-template.md](docs/report-template.md) when you send results back.

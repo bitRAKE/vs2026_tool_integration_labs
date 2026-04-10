@@ -1,0 +1,62 @@
+{
+  "$schema": "./schemas/fasm-profiles.schema.json",
+  "version": 1,
+  "description": "Schema-backed FASM/fasmg profile sample for Visual Studio 2026 Open Folder.",
+  "activeProfiles": {
+    "build": "hello-com",
+    "syntax": "hello-syntax",
+    "inspect": "hello-output"
+  },
+  "toolDefaults": {
+    "frontendPreference": "auto",
+    "maxErrors": 3,
+    "maxPasses": 100,
+    "maxRecursionDepth": 10000,
+    "verbose": 1,
+    "injectedCommands": []
+  },
+  "profiles": {
+    "hello-com": {
+      "kind": "assemble",
+      "description": "Build src/hello.fasm into a COM file using the active tool defaults.",
+      "source": "src/hello.fasm",
+      "output": "out/profiles/hello.com"
+    },
+    "restartout-com": {
+      "kind": "assemble",
+      "description": "Build the restartout sample into a separate COM artifact.",
+      "source": "src/restartout-demo.fasm",
+      "output": "out/profiles/restartout.com",
+      "verbose": 2
+    },
+    "hello-syntax": {
+      "kind": "syntaxCheck",
+      "description": "Validate hello.fasm with direct fasmg execution so syntax errors surface immediately.",
+      "source": "src/hello.fasm",
+      "output": "nul",
+      "frontendPreference": "directFasmg"
+    },
+    "include-syntax": {
+      "kind": "syntaxCheck",
+      "description": "Validate showcase.finc through a generated wrapper source.",
+      "source": "src/showcase.finc",
+      "output": "nul",
+      "frontendPreference": "directFasmg"
+    },
+    "broken-syntax": {
+      "kind": "syntaxCheck",
+      "description": "Deliberately fail on the broken quote sample to validate diagnostics.",
+      "source": "src/broken-quote.fasm",
+      "output": "nul",
+      "frontendPreference": "directFasmg",
+      "maxErrors": 5,
+      "verbose": 2
+    },
+    "hello-output": {
+      "kind": "inspectOutput",
+      "description": "Inspect the hello.com artifact produced by the active build profile.",
+      "target": "out/profiles/hello.com",
+      "previewBytes": 16
+    }
+  }
+}

@@ -192,6 +192,118 @@ function Get-VsfFasmToolchain {
     }
 }
 
+function Invoke-VsfFasmCommand {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $SourcePath,
+
+        [string] $OutputPath,
+
+        [ValidateSet("auto", "fasm2", "directFasmg")]
+        [string] $FrontendPreference = "auto",
+
+        [int] $MaxErrors,
+
+        [int] $MaxPasses,
+
+        [int] $MaxRecursionDepth,
+
+        [ValidateSet(0, 1, 2)]
+        [int] $Verbosity = 0,
+
+        [string[]] $InjectedCommands = @()
+    )
+
+    if (-not (Test-Path -LiteralPath $SourcePath)) {
+        throw "Source file '$SourcePath' was not found."
+    }
+
+    $resolvedSource = (Resolve-Path -LiteralPath $SourcePath).Path
+    $toolchain = Get-VsfFasmToolchain
+
+    $arguments = @()
+    if ($PSBoundParameters.ContainsKey("MaxErrors")) {
+        $arguments += "-e$MaxErrors"
+    }
+
+    if ($PSBoundParameters.ContainsKey("MaxPasses")) {
+        $arguments += "-p$MaxPasses"
+    }
+
+    if ($PSBoundParameters.ContainsKey("MaxRecursionDepth")) {
+        $arguments += "-r$MaxRecursionDepth"
+    }
+
+    switch ($Verbosity) {
+        1 { $arguments += "-v1" }
+        2 { $arguments += "-v2" }
+    }
+
+    $requestedInjectedCommands = @($InjectedCommands | Where-Object { $_ })
+
+    $useDirectFasmg = $false
+    switch ($FrontendPreference) {
+        "directFasmg" { $useDirectFasmg = $true }
+        "fasm2" { $useDirectFasmg = $false }
+        "auto" { $useDirectFasmg = -not $toolchain.Fasm2Path }
+    }
+
+    if ($useDirectFasmg) {
+        if (-not $toolchain.CanUseDirectFasmg) {
+            throw "Direct fasmg execution was requested, but fasmg.exe or fasm2.inc could not be resolved."
+        }
+
+        $allInjectedCommands = @(
+            ("Include('{0}')" -f ($toolchain.Fasm2IncludePath -replace "'", "''"))
+        ) + $requestedInjectedCommands
+
+        foreach ($command in $allInjectedCommands) {
+            $arguments += "-i$command"
+        }
+
+        $arguments += $resolvedSource
+        if ($PSBoundParameters.ContainsKey("OutputPath") -and $null -ne $OutputPath -and $OutputPath -ne "") {
+            $arguments += $OutputPath
+        }
+
+        $output = & $toolchain.FasmgPath @arguments 2>&1
+        foreach ($line in $output) {
+            Write-Host $line
+        }
+
+        if ($LASTEXITCODE -ne 0) {
+            throw "fasmg.exe returned exit code $LASTEXITCODE."
+        }
+
+        return $toolchain
+    }
+
+    if (-not $toolchain.Fasm2Path) {
+        throw "fasm2.cmd could not be resolved. Either set FASM2_PATH or request direct fasmg execution with a valid fasmg toolchain."
+    }
+
+    foreach ($command in $requestedInjectedCommands) {
+        $arguments += "-i$command"
+    }
+
+    $arguments += $resolvedSource
+    if ($PSBoundParameters.ContainsKey("OutputPath") -and $null -ne $OutputPath -and $OutputPath -ne "") {
+        $arguments += $OutputPath
+    }
+
+    $output = & $toolchain.Fasm2Path @arguments 2>&1
+    foreach ($line in $output) {
+        Write-Host $line
+    }
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "fasm2.cmd returned exit code $LASTEXITCODE."
+    }
+
+    return $toolchain
+}
+
 function Invoke-VsfFasmSource {
     [CmdletBinding()]
     param(
@@ -204,56 +316,8 @@ function Invoke-VsfFasmSource {
         [switch] $PreferDirectFasmg
     )
 
-    if (-not (Test-Path -LiteralPath $SourcePath)) {
-        throw "Source file '$SourcePath' was not found."
-    }
-
-    $resolvedSource = (Resolve-Path -LiteralPath $SourcePath).Path
-    $toolchain = Get-VsfFasmToolchain
-
-    if ($PreferDirectFasmg -and $toolchain.CanUseDirectFasmg) {
-        $injectedCommand = "Include('{0}')" -f ($toolchain.Fasm2IncludePath -replace "'", "''")
-        $output = & $toolchain.FasmgPath "-i$injectedCommand" $resolvedSource $OutputPath 2>&1
-        foreach ($line in $output) {
-            Write-Host $line
-        }
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "fasmg.exe returned exit code $LASTEXITCODE."
-        }
-
-        return $toolchain
-    }
-
-    if ($toolchain.Fasm2Path) {
-        $command = ('""{0}" "{1}" "{2}""' -f $toolchain.Fasm2Path, $resolvedSource, $OutputPath)
-        $output = & cmd.exe /d /s /c $command 2>&1
-        foreach ($line in $output) {
-            Write-Host $line
-        }
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "fasm2.cmd returned exit code $LASTEXITCODE."
-        }
-
-        return $toolchain
-    }
-
-    if ($toolchain.CanUseDirectFasmg) {
-        $injectedCommand = "Include('{0}')" -f ($toolchain.Fasm2IncludePath -replace "'", "''")
-        $output = & $toolchain.FasmgPath "-i$injectedCommand" $resolvedSource $OutputPath 2>&1
-        foreach ($line in $output) {
-            Write-Host $line
-        }
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "fasmg.exe returned exit code $LASTEXITCODE."
-        }
-
-        return $toolchain
-    }
-
-    throw "Unable to locate a usable fasm toolchain. Set FASM2_PATH to fasm2.cmd or set both FASM2_PATH and FASMG_PATH to a compatible checkout."
+    $frontendPreference = if ($PreferDirectFasmg) { "directFasmg" } else { "auto" }
+    return Invoke-VsfFasmCommand -SourcePath $SourcePath -OutputPath $OutputPath -FrontendPreference $frontendPreference
 }
 
-Export-ModuleMember -Function Get-VsfVisualStudioInstance, Get-VsfVsDevCmdPath, Get-VsfMSBuildPath, Invoke-VsfVsDevCommand, Get-VsfFasmToolchain, Invoke-VsfFasmSource
+Export-ModuleMember -Function Get-VsfVisualStudioInstance, Get-VsfVsDevCmdPath, Get-VsfMSBuildPath, Invoke-VsfVsDevCommand, Get-VsfFasmToolchain, Invoke-VsfFasmCommand, Invoke-VsfFasmSource

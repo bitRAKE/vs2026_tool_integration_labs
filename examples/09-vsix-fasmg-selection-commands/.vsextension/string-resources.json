@@ -1,0 +1,7 @@
+{
+  "FasmgSelectionCommands.Menu.DisplayName": "FASMG Selection Utilities",
+  "FasmgSelectionCommands.RenameRegister.DisplayName": "Rename Register In Selection",
+  "FasmgSelectionCommands.UppercaseRegisters.DisplayName": "Uppercase Registers In Selection",
+  "FasmgSelectionCommands.LowercaseRegisters.DisplayName": "Lowercase Registers In Selection",
+  "FasmgSelectionCommands.ConvertHex.DisplayName": "Convert h-Suffix Hex To 0x In Selection"
+}

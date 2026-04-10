@@ -1,0 +1,137 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "Build with Active FASM Profile",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "build",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\invoke-profile.ps1",
+        "-ProfileSlot",
+        "build"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Clean FASM Profile Outputs",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "clean",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\clean.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Validate FASM Profile File",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\validate-profile-file.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Show Active FASM Profiles",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\show-profiles.ps1"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Active Syntax Profile",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\invoke-profile.ps1",
+        "-ProfileSlot",
+        "syntax"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskLabel": "Inspect Active FASM Output",
+      "appliesTo": "/",
+      "type": "launch",
+      "contextType": "custom",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\invoke-profile.ps1",
+        "-ProfileSlot",
+        "inspect"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskName": "Active Syntax Profile For This FASM File",
+      "appliesTo": "*.fasm",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\invoke-profile.ps1",
+        "-ProfileSlot",
+        "syntax",
+        "-SourceOverride",
+        "${file}"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    },
+    {
+      "taskName": "Active Syntax Profile For This FINC File",
+      "appliesTo": "*.finc",
+      "type": "default",
+      "command": "powershell.exe",
+      "args": [
+        "-NoLogo",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts\\invoke-profile.ps1",
+        "-ProfileSlot",
+        "syntax",
+        "-SourceOverride",
+        "${file}"
+      ],
+      "workingDirectory": "${workspaceRoot}"
+    }
+  ]
+}

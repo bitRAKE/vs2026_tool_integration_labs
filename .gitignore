@@ -15,3 +15,6 @@ TestResults/
 *.vsix
 .ninja_log
 .ninja_deps
+ext/tree-sitter-cli/
+ext/nodejs/
+ext/downloads/

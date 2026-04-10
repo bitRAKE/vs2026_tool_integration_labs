@@ -17,10 +17,21 @@ if ($grammar.fileTypes -notcontains "fasm" -or $grammar.fileTypes -notcontains "
     throw "Grammar does not register both .fasm and .finc."
 }
 
+if ($grammar.scopeName -ne "source.fasmg") {
+    throw ("Grammar scope name was '{0}', expected 'source.fasmg'." -f $grammar.scopeName)
+}
+
+$repo = $grammar.repository.PSObject.Properties.Name
+foreach ($requiredRule in @("numbers", "strings", "preprocessor", "directives", "calminstruction-block")) {
+    if ($repo -notcontains $requiredRule) {
+        throw ("Grammar repository is missing the '{0}' rule." -f $requiredRule)
+    }
+}
+
 $null = Get-Content -Raw $languageConfigPath | ConvertFrom-Json
 
 $pkgDefText = Get-Content -Raw $pkgDefPath
-if ($pkgDefText -notmatch "source\.fasm") {
+if ($pkgDefText -notmatch "source\.fasmg") {
     throw "Pkgdef does not contain the expected grammar mapping."
 }
 

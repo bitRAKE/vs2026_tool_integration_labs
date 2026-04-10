@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VSF FASM Profile Configuration",
+  "description": "Schema-backed Open Folder configuration for fasm2/fasmg build, syntax-check, and binary-inspection profiles.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "version",
+    "activeProfiles",
+    "toolDefaults",
+    "profiles"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Relative or absolute path to this schema file."
+    },
+    "version": {
+      "const": 1,
+      "description": "Schema version for this profile document."
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional human-readable note for the profile file."
+    },
+    "activeProfiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "build",
+        "syntax",
+        "inspect"
+      ],
+      "properties": {
+        "build": {
+          "type": "string",
+          "description": "Profile name used by the Build task."
+        },
+        "syntax": {
+          "type": "string",
+          "description": "Profile name used by syntax-check tasks."
+        },
+        "inspect": {
+          "type": "string",
+          "description": "Profile name used by binary inspection tasks."
+        }
+      }
+    },
+    "toolDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "frontendPreference": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "fasm2",
+            "directFasmg"
+          ],
+          "default": "auto"
+        },
+        "maxErrors": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "maxPasses": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 100
+        },
+        "maxRecursionDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 10000
+        },
+        "verbose": {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "default": 0
+        },
+        "injectedCommands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "description",
+              "source",
+              "output"
+            ],
+            "properties": {
+              "kind": {
+                "const": "assemble"
+              },
+              "description": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "output": {
+                "type": "string"
+              },
+              "frontendPreference": {
+                "type": "string",
+                "enum": [
+                  "auto",
+                  "fasm2",
+                  "directFasmg"
+                ]
+              },
+              "maxErrors": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxPasses": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRecursionDepth": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "verbose": {
+                "type": "integer",
+                "enum": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              "injectedCommands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "description",
+              "source"
+            ],
+            "properties": {
+              "kind": {
+                "const": "syntaxCheck"
+              },
+              "description": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "output": {
+                "type": "string"
+              },
+              "frontendPreference": {
+                "type": "string",
+                "enum": [
+                  "auto",
+                  "fasm2",
+                  "directFasmg"
+                ]
+              },
+              "maxErrors": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxPasses": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "maxRecursionDepth": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "verbose": {
+                "type": "integer",
+                "enum": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              "injectedCommands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "description",
+              "target"
+            ],
+            "properties": {
+              "kind": {
+                "const": "inspectOutput"
+              },
+              "description": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "previewBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "default": 16
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

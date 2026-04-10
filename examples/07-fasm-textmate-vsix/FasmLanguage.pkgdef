@@ -2,7 +2,7 @@
 "Fasm"="$PackageFolder$\Grammars"
 
 [$RootKey$\TextMate\LanguageConfiguration\GrammarMapping]
-"source.fasm"="$PackageFolder$\fasm-language-configuration.json"
+"source.fasmg"="$PackageFolder$\fasm-language-configuration.json"
 
 [$RootKey$\TextMate\LanguageConfiguration\ContentTypeMapping]
 "fasm"="$PackageFolder$\fasm-language-configuration.json"

@@ -1,0 +1,36 @@
+; Rich fasmg showcase for manual editor validation.
+org 100h
+include 'message.finc'
+restartout 200h
+
+value_hex_prefix  = 0xDE'AD'BE'EF
+value_hex_dollar  = $0F
+value_hex_suffix  = 2Ah
+value_binary      = 1010'1010b
+value_octal       = 77q
+value_decimal     = 1_000d
+value_float_dot   = 1.0e+_10
+value_float_short = 1f
+
+label?:
+macro emit_message! text&
+    display text
+end macro
+
+calminstruction build_blob? target*
+    local counter
+entry:
+    check target
+    stringify counter, target
+    display counter
+    jno done
+done:
+end calminstruction
+
+db 'single''quote', "double""quote"
+display 'line one' \
+        'line two'
+
+current_base = $
+outer_base = $$
+repeat_index = %

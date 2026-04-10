@@ -1,0 +1,2 @@
+; Optional sample for checking unclosed string handling.
+db "unterminated
