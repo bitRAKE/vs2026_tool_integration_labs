@@ -62,8 +62,4 @@ The first five examples establish the foundation behavior. Examples 06 and 07 pi
 
 Official references used to shape this repo are listed in [docs/reference-links.md](docs/reference-links.md).
 
-The next-step research track for deeper external-tool integration is documented in [docs/external-tool-integration-decision-memo.md](docs/external-tool-integration-decision-memo.md).
-
-The parser-core and LSP sequence for `fasmg` is tracked in [docs/fasmg_tree_sitter_lsp_roadmap.md](docs/fasmg_tree_sitter_lsp_roadmap.md).
-
 Use [docs/report-template.md](docs/report-template.md) when you send results back.
