@@ -33,20 +33,19 @@ The first five examples establish the foundation behavior. Examples 06 and 07 pi
    - what diverged from the README
    - screenshots or copied Output-window text when relevant
 
-## Examples
+## Examples/
 
 | Example | Focus | Primary Visual Studio surface |
 | --- | --- | --- |
-| `examples/01-open-folder-multi-root` | `.code-workspace`, multi-folder views, folder-local tasks, `.vscode/settings.json` | `File > Open > Workspace` |
-| `examples/02-open-folder-cpp-environments` | `CppProperties.json`, environment inheritance, build/debug JSON for C++ Open Folder | `File > Open > Folder` |
-| `examples/03-external-build-ninja` | `tasks.vs.json` driving `ninja` instead of a solution/project system | `File > Open > Folder` |
-| `examples/04-external-build-dsl-pipeline` | custom DSL compiler script plus Open Folder build/preview tasks | `File > Open > Folder` |
-| `examples/05-dsl-textmate-vsix` | VSIX packaging for TextMate grammar + Language Configuration | `Open Project` or `Open Folder` |
-| `examples/06-open-folder-fasm2-build` | real `fasm2.cmd` build and syntax-check tasks with environment overrides | `File > Open > Folder` |
-| `examples/07-fasm-textmate-vsix` | real `.fasm` and `.finc` VSIX highlighting package | `Open Project` or `Open Folder` |
-| `examples/08-open-folder-fasm-profiles` | schema-backed JSON profiles for real `fasm2`/`fasmg` build, syntax, and inspect tasks | `File > Open > Folder` |
-| `examples/09-vsix-fasmg-selection-commands` | selection-scoped VSIX commands for register rename, register casing, and hex literal conversion | `Open Project` or `Open Folder` |
-| `examples/10-native-fasmg-parser-core` | native bootstrap parser core plus parse-tree/analysis JSON, synced Tree-sitter scaffold assets, symbol lifecycle tracking, and LSP-oriented contract fixtures | terminal-driven foundation |
+| `01-open-folder-multi-root` | `.code-workspace`, multi-folder views, folder-local tasks, `.vscode/settings.json` | `Workspace` |
+| `02-open-folder-cpp-environments` | `CppProperties.json`, environment inheritance, build/debug JSON for C++ Open Folder | `Folder` |
+| `03-external-build-ninja` | `tasks.vs.json` driving `ninja` instead of a solution/project system | `Folder` |
+| `04-external-build-dsl-pipeline` | custom DSL compiler script plus Open Folder build/preview tasks | `Folder` |
+| `05-dsl-textmate-vsix` | VSIX packaging for TextMate grammar + Language Configuration | `Project`/`Folder` |
+| `06-open-folder-fasm2-build` | real `fasm2.cmd` build and syntax-check tasks with environment overrides | `Folder` |
+| `07-fasm-textmate-vsix` | real `.fasm` and `.finc` VSIX highlighting package | `Project`/`Folder` |
+| `08-open-folder-fasm-profiles` | schema-backed JSON profiles for real `fasm2`/`fasmg` build, syntax, and inspect tasks | `Folder` |
+| `09-vsix-fasmg-selection-commands` | selection-scoped VSIX commands for register rename, register casing, and hex literal conversion | `Project`/`Folder` |
 
 ## Assumptions
 
